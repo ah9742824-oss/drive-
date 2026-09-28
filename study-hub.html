@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مكتبة المواد الدراسية</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1b1f2a;--mu:#667085;--ac:#2563eb;--ok:#16a34a;--bd:#e4e7ee;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f131b;--card:#181d28;--tx:#e8ebf2;--mu:#98a2b3;--ac:#60a5fa;--ok:#4ade80;--bd:#283041}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Tahoma,"Segoe UI",Arial,sans-serif;line-height:1.6}
+main{max-width:860px;margin:0 auto;padding:20px 14px 40px}
+h1{font-size:1.5rem;margin:0 0 4px}p.s{color:var(--mu);margin:0 0 16px;font-size:.9rem}
+.tabs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:18px}
+.tab{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px;cursor:pointer;color:var(--tx);font:inherit;text-align:center}
+.tab.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--ac) inset}
+.tab b{display:block}.tab small{color:var(--mu)}
+.bar{height:6px;background:var(--bd);border-radius:9px;margin-top:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ok);width:0}
+.ch{background:var(--card);border:1px solid var(--bd);border-radius:12px;margin-bottom:12px;padding:12px}
+.ch h3{margin:0 0 8px;font-size:1rem;color:var(--ac)}
+.row{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--bd);flex-wrap:wrap}
+.row:first-of-type{border-top:0}
+.ck{width:30px;height:30px;border-radius:50%;border:2px solid var(--bd);background:none;color:transparent;cursor:pointer;font-size:16px;flex:none}
+.ck.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.row a{color:var(--ac);text-decoration:none;flex:1 1 180px;min-width:0;overflow-wrap:anywhere}
+.row.done a{text-decoration:line-through;color:var(--mu)}
+.nm{border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:8px;padding:5px 8px;font:inherit;width:150px;max-width:100%}
+</style></head><body><main>
+<h1>📚 مكتبة المواد الدراسية</h1>
+<p class="s">اختار المادة، وعلّم ✓ على اللي خلصته (بيتحفظ في متصفحك). علامة ⚠️ = اللينك ناقص حرف في الـ PDF الأصلي.</p>
+<div class="tabs" id="tabs"></div><div id="view"></div>
+</main>
+<script>
+const D=[
+{n:"Measurements",c:[
+["Ch.1",["p PLJQHeRsuE2lJZeQGljXA2mdijRe_Dxpd Chapter explanation + sheet solutions (playlist) ⚠️"]],
+["Ch.2",["d 1znKFw5b7W82pSKnNrOGPTnxwd-UPrEQC Short videos (Drive folder)"]],
+["Ch.3",["v gLNVvmpb5AQ Video 1","v 7GL7imS5pww Video 2"]]]},
+{n:"Circuit 3",c:[
+["Ch.1",["v BtWzsw9_6YM Chapter 1"]],
+["Ch.2",["v sqauFQa8NpQ Natural Response of RL","v AnHHtetNidw Natural Response of RC","v rjNaEsT9k3U Step Response of RL and RC","v PCSyymLY7R4 Sequential Switching"]],
+["Ch.3",["v AkFmOk76XJ8 Natural Response RLC Parallel","v cEwTp0tsOj0 Step Response RLC Parallel","v rFgVCIdH_Q4 Natural & Step RLC Series"]],
+["Ch.4",["v w3QT3H8PGYI Video 1","v vatMQuPla4E Video 2","v V64XH43YgWc Video 3","v 4H9fZr-BZ3Y Sheet Question 22"]],
+["Ch.5 (each video ~20 min)",["v YyXBSqmbwCw Video 1","v J8DuDENNFNM Video 2","v YjdPqjaEz8A Video 3","v y1NetWRGuD0 Video 4","v e2LC9Zvexhs Video 5","v OouYlH6mqng Video 6"]]]},
+{n:"Electronics",c:[
+["Ch.1 Semiconductor (each video ~10 min)",["v fQPE64jxC6Y Video 1","v To2iS12jKYE Video 2","v R1tftToDIQw Video 3","v M8D_1lY3gxY Video 4","v ullwaufOW-4 Video 5","v 25RwHaB_Uy8 Video 6","v L1Yvbhtuhtk Video 7"]],
+["Ch.2 Diode",["p PLVVYNLhxBzorNP8_xPw5qvpen0UZeYDVo Diode playlist"]],
+["Ch.3 BJT Transistor",["v OHRF_j93KRo AC - 1","v ci2ScLVvx2Y AC - 2","v tTLqpRcKivU DC - 1","v wqAgVMhkmcU DC - 2","v tUlVzWrPQZg DC - 3","v ZYjswtS1tyo DC - 4"]],
+["Ch.4 FET Transistor",["v fEJGiaPE_DM DC - 1","v vncXNeuOMQU DC - 2","v knnQGtcDRQw AC","v F6fx89faYrM N-MOS Gates"]]]},
+{n:"Logic",c:[
+["Number System",["v cglntvDK_ck Number System"]],
+["Boolean Algebra",["v xZOw3jDBp_k Video 1","v ZJjatiOwXoU Video 2"]],
+["Ch.3 K-map",["p PLI6BBuYJW8gthoF2_kvTuwlLB0EAUQr2h K-map playlist"]],
+["Ch.4 Combinational Circuits",["v AT6cbTrs2Cg Video","p PLI6BBuYJW8gvXGQ7xz5nQSoGLYCtnI5V Playlist ⚠️"]],
+["Ch.5 Sequential Logic",["p PLI6BBuYJW8gvF6q3TmN_P7o2lSb0kpWEh Playlist"]],
+["Ch.6 Counter",["p PLI6BBuYJW8guAjgToboJikFllcG_QuUF4 Playlist"]]]},
+{n:"Machines 1",c:[
+["Transformers",["p PLJQHeRsu-E2lX5y6gro7hUw1D9vK2YXj Playlist ⚠️"]],
+["DC Generator",["v 0Bh_1X4kX_g Video 1","v -sQ7XeQJmAY Video 2","v WbBzKjtBlSI Video 3"]],
+["DC Motor",["v dThX1m1VdDg DC Motor"]]]},
+{n:"Math 5",c:[
+["Gamma & Beta Function",["v ChVM8FwlfCc Video"]],
+["Complex Number Function",["v kDI9BpD2JFo Video 1","v O3U90behVnI Video 2","v MxE4EsT4jKU Video 3"]],
+["Laplace",["v 8bot8ul_k4A Video 1","v dTAGXSH9d8A Video 2","v FSfc2DjLpMo Video 3"]],
+["Inverse Laplace",["v 9UsQOxLKITc Video 1","v v6LvUHC-fBU Video 2"]],
+["Complex Integrals",["v PHsnjKaIVCQ Video"]],
+["Differential Equations using Laplace",["v IrRDexEUaYI Video"]]]},
+{n:"Fluid",c:[
+["Full Curriculum",["p PLstUynZeYDJFvVeSgN6hzUqytA4dzIXp- Playlist: full curriculum"]],
+["Important Playlist (senior batch)",["p PLURUFRb79u1or2U0qkzUGnfuLxbUZ1VnT Playlist: covers the whole curriculum"]],
+["Ch.3 (comes in the midterm)",["p PLf-Izkh1Mi5I Playlist: important chapters"]]]}];
+const U={v:i=>"https://youtu.be/"+i,p:i=>"https://www.youtube.com/playlist?list="+i,d:i=>"https://drive.google.com/drive/folders/"+i};
+let S={};try{S=JSON.parse(localStorage.getItem("sh")||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem("sh",JSON.stringify(S))}catch(e){}};
+let cur=0;
+const items=s=>s.c.flatMap(c=>c[1].map(x=>{const[t,i,...l]=x.split(" ");return{u:U[t](i),l:l.join(" ")}}));
+function tabs(){document.getElementById("tabs").innerHTML=D.map((s,k)=>{const a=items(s),d=a.filter(x=>S[x.u]&&S[x.u].k).length;
+return `<button class="tab ${k==cur?"on":""}" onclick="cur=${k};draw()"><b>${s.n}</b><small>${d}/${a.length}</small><div class="bar"><i style="width:${d/a.length*100}%"></i></div></button>`}).join("")}
+function draw(){tabs();const s=D[cur];
+document.getElementById("view").innerHTML=s.c.map(c=>`<section class="ch"><h3>${c[0]}</h3>`+c[1].map(x=>{const[t,i,...l]=x.split(" "),u=U[t](i),e=S[u]||{};
+return `<div class="row ${e.k?"done":""}"><button class="ck ${e.k?"on":""}" data-u="${u}" title="تم">✓</button><a href="${u}" target="_blank" rel="noopener">${l.join(" ")}</a></div>`}).join("")+`</section>`).join("");
+document.querySelectorAll(".ck").forEach(b=>b.onclick=()=>{const u=b.dataset.u;S[u]=S[u]||{};S[u].k=!S[u].k;save();draw()});
+}
+draw();
+</script></body></html>
